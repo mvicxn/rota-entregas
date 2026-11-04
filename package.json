@@ -1,0 +1,20 @@
+{
+  "name": "rota-entregas",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Painel de roteirizacao, rastreio ao vivo e Pix na entrega — React + Express + SQLite",
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "npm run start --prefix server",
+    "test": "npm test --prefix server"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

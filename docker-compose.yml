@@ -1,0 +1,31 @@
+services:
+  rota-app:
+    build: .
+    ports:
+      - "4015:4015"
+    environment:
+      PORT: 4015
+      MAP_MODE: mock
+      PIX_MODE: mock
+      JWT_SECRET: troque-em-producao
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/rota_entregas
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rota_entregas
+    volumes:
+      - rota_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  rota_pg_data:
